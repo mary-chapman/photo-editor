@@ -1,0 +1,40 @@
+.choosePhoto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 75px;
+}
+.choosePhoto button {
+    display: block;
+    width: 200px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 10pt;
+    font-weight: 700;
+    letter-spacing: .1em;
+    /* background-color: #252628; */
+}
+
+.upload {
+    border: 2px solid #1f6fef;
+    color: #6da5ff;
+}
+
+.upload:hover {
+    border-color: #6da5ff;
+    color: #6da5ff;
+    cursor: pointer;
+}
+
+.random {
+    border: 2px solid #7b3ee8;
+    color: #b287ff;
+    margin-top: 50px;
+}
+
+.random:hover {
+    border-color: #b287ff;
+    color: #b287ff;
+    cursor: pointer;
+}
+

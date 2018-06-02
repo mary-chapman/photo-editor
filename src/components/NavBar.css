@@ -1,0 +1,72 @@
+.container {
+    display: flex;
+    background-color: #75c48b;
+    margin-top: 0;
+    color: white;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.navTitle {
+    text-align: left;
+    margin-right: auto;
+    font-size: 22pt;
+    font-family: 'Lobster', 'cursive';
+    letter-spacing: .1em;
+}
+.login, .signup {
+    margin-right: 10px;
+    margin-left: 10px;
+    align-self: center; 
+    color: #fff;
+    border: 1px solid white;
+    padding: 10px 15px;
+    font-weight: bold;
+    border-radius: 5%;
+    font-size: 8pt;
+}
+.login:hover, .signup:hover {
+    background-color: lightyellow;
+    color: #17266d;
+    cursor: pointer;
+}
+ul {
+    list-style-type: none;
+}
+
+
+
+/* .navBar {
+    width: 100%;
+    display: inline-block;
+    background-color: #17266d;
+    color: white;
+    margin-top: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+}
+
+.navTitle {
+    font-family: 'Lobster', cursive;
+    font-size: 22pt;
+    letter-spacing: .1em;
+    text-align: left;
+    padding-left: 20px;
+    display: inline;
+}
+
+.loginOrSignUp {
+    display: flex;
+    justify-content: right;
+    color: black;
+    display: inline-block;
+    background-color: burlywood;
+}
+
+.login, .signup {
+    align-items: right;
+    border: none;
+    background: #d37681;
+    display: inline;
+} */
