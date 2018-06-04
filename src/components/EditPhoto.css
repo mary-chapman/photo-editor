@@ -5,7 +5,8 @@ img {
 }
 .code {
     width: 390px;
-    height: 25px;
+    min-height: 15px;
+    /* height: 25px; */
     display: inline-block;
     margin-top: 30px;
     border-radius: 5px;
@@ -14,8 +15,9 @@ img {
     text-align: left;
     padding-left: 10px;
     padding-top: 7px;
+    padding-bottom: 7px;
     font-size: 12pt;
-    vertical-align: middle;
+    /* vertical-align: middle; */
     font-family: monospace;
 }
 
