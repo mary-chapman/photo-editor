@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import '../assets/cat.jpg';
 import filters from '../filterData';
 import test from '../filterDataTEST';
@@ -6,7 +8,8 @@ import test from '../filterDataTEST';
 import './EditPhoto.css';
 
 
-let tempImage = 'https://images.unsplash.com/photo-1458530970867-aaa3700e966d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5f8426c7be0eb1b30a6329adeddb6207&auto=format&fit=crop&w=1050&q=80'
+var tempImage = 'https://images.unsplash.com/photo-1458530970867-aaa3700e966d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5f8426c7be0eb1b30a6329adeddb6207&auto=format&fit=crop&w=1050&q=80'
+
 
 
 class EditPicture extends Component {
@@ -29,28 +32,34 @@ class EditPicture extends Component {
         this.postPicture = this.postPicture.bind(this)
     }
 
-    postPicture() {
-        //console.log("FILTERS" + this.state.savedFilters)
+    async postPicture() {
+        // prepare to send
         var filterName;
         var objToSend = {
             userId: 1,
-            pictureUrl: tempImage,
+            pictureUrl: 'https://images.unsplash.com/photo-1458530970867-aaa3700e966d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5f8426c7be0eb1b30a6329adeddb6207&auto=format&fit=crop&w=1050&q=80',
         }
+
         if (this.state.savedFilters.length > 0) {
-            this.state.savedFilters.map(filter => {
-                console.log(filter.match(/\d+/g).toString())
-                filterName = filter.match(/^[^\(]+/);
-                objToSend[filterName] = filter.match(/\d+/g)[0];
+            await this.state.savedFilters.map(filter => {
+                //console.log(filter.match(/\d+/g).toString())
+                
+                //console.log(filterName)
+                objToSend[filter.match(/^[^\(]+/)] = filter.match(/\d+(\.\d*)?|\.\d+/g)[0];
             })
         }
-        
-        console.log(objToSend)
 
-        // var buttonObject = {
-        //     userId: 1,
-        //     pictureUrl: tempImage,
-        //     grayscale: 
-        // }
+        let data = JSON.stringify(objToSend)
+        
+        await axios.post('http://localhost:8080/pictures', data, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(res => {
+            console.log(objToSend)
+        })
+        
     }
 
     handleSave() {
@@ -71,6 +80,7 @@ class EditPicture extends Component {
             document.getElementsByClassName(this.state.currentFilterName)[0].disabled = true;
             document.getElementsByClassName(this.state.currentFilterName)[0].style = 'border-color:#878787; color: gray; background-color: #bababa ;cursor: default';
         }
+
 
      }
 

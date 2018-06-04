@@ -16,6 +16,7 @@ class Gallery extends Component {
             .then(res => {
                 // console.log(res);
                 res.data.map(i => {
+                    console.log(res.data)
                     this.setState({
                         pictures: [...this.state.pictures, i]
                     })
