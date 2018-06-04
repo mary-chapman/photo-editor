@@ -36,15 +36,8 @@ class GalleryImage extends Component {
     }
     
     render() {
-        var style = {
-            filter:  this.filterStringBuildFromData,
-            width: "400px"
-        }
-        console.log(this.filterStringBuildFromData())
         return (
             <div>
-                {/* <h1>Gallery</h1> */}
-                c
                 <img src={this.props.pictureUrl} 
                     style={{ filter: this.filterStringBuildFromData()}} width="400px" 
                 />

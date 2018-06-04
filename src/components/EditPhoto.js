@@ -6,6 +6,7 @@ import test from '../filterDataTEST';
 import './EditPhoto.css';
 
 
+let tempImage = 'https://images.unsplash.com/photo-1458530970867-aaa3700e966d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5f8426c7be0eb1b30a6329adeddb6207&auto=format&fit=crop&w=1050&q=80'
 
 
 class EditPicture extends Component {
@@ -25,6 +26,31 @@ class EditPicture extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSave = this.handleSave.bind(this);
+        this.postPicture = this.postPicture.bind(this)
+    }
+
+    postPicture() {
+        //console.log("FILTERS" + this.state.savedFilters)
+        var filterName;
+        var objToSend = {
+            userId: 1,
+            pictureUrl: tempImage,
+        }
+        if (this.state.savedFilters.length > 0) {
+            this.state.savedFilters.map(filter => {
+                console.log(filter.match(/\d+/g).toString())
+                filterName = filter.match(/^[^\(]+/);
+                objToSend[filterName] = filter.match(/\d+/g)[0];
+            })
+        }
+        
+        console.log(objToSend)
+
+        // var buttonObject = {
+        //     userId: 1,
+        //     pictureUrl: tempImage,
+        //     grayscale: 
+        // }
     }
 
     handleSave() {
@@ -80,12 +106,12 @@ class EditPicture extends Component {
 
         // change the bg color of the button 
         document.querySelectorAll("button").forEach(i => {
-            console.log(i.style.backgroundColor)
+            //console.log(i.style.backgroundColor)
             if (i.style.color != 'gray') {
                 i.style = 'background-color: white'
             }
         })
-        if (this.state.currentFilterName == 'hue-rotate') {
+        if (this.state.currentFilterName === 'hue-rotate') {
             document.getElementsByClassName('hueRotate')[0].style = await 'background-color:#fff6e0';
         } else {
             document.getElementsByClassName(this.state.currentFilterName)[0].style = await 'background-color:#fff6e0';
@@ -108,10 +134,11 @@ class EditPicture extends Component {
 
 
     render() {
-        let tempImage = 'https://images.unsplash.com/photo-1458530970867-aaa3700e966d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5f8426c7be0eb1b30a6329adeddb6207&auto=format&fit=crop&w=1050&q=80'
 
         return (
             <div className="editPicture">
+
+                <button onClick={this.postPicture}>Add Image to Gallery</button>
 
                 {/* <img id="image" src={require('../assets/cat.jpg')} width="400px" alt="" /> */}
                 <img id="image" src={tempImage} width="400px" alt="" />
