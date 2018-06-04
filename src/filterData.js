@@ -32,11 +32,28 @@ const filters = {
         unit: ""
     },
     hueRotate: {
+        name: 'hue-rotate',
         min: 0,
         max: 180,
         step: .1,
         defaultValue: 90,
         unit: "deg"
+    },
+    brightness: {
+        name: 'brightness',
+        min: 0,
+        max: 200,
+        step: .1,
+        defaultValue: 125,
+        unit: "%"
+    },
+    contrast: {
+        name: 'contrast',
+        min: 0,
+        max: 2,
+        step: .1,
+        defaultValue: 2,
+        unit: ""
     },
     invert: {
         name: 'invert',
@@ -44,6 +61,14 @@ const filters = {
         max: 1,
         step: .01,
         defaultValue: 1,
+        unit: ""
+    },
+    opacity: {
+        name: 'opacity',
+        min: 0,
+        max: 1,
+        step: .01,
+        defaultValue: .5,
         unit: ""
     }
 

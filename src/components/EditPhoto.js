@@ -19,7 +19,7 @@ class EditPicture extends Component {
             currentFilterMin: '',
             currentFilterMax: '',
             currentFilterStep: '',
-            currentFilterValue: ''
+            currentFilterValue: '',
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -30,17 +30,26 @@ class EditPicture extends Component {
     handleSave() {
         var filterToSave = `${this.state.currentFilterName}(${document.getElementById("sliderInput").value}${this.state.currentFilterUnit})`
         this.setState({ savedFilters: [...this.state.savedFilters, filterToSave]})
-        //document.getElementById("image").style.filter += filterToSave;
         document.getElementById("text").innerHTML = 'filter: ' + this.state.savedFilters.join(' ') + ' ' + filterToSave;
+        //change the color of the handlesave button
 
-        console.log(this.state.savedFilters.join(" "));
+        //disable the button clicked and change css
+        if (this.state.currentFilterName == 'hue-rotate') {
+            document.getElementsByClassName('hueRotate')[0].style = 'border-color:#878787; color: gray; background-color: #bababa ;cursor: default';
+            document.getElementsByClassName("hueRotate")[0].disabled = true;
+        } else {
+            document.getElementsByClassName(this.state.currentFilterName)[0].disabled = true;
+            document.getElementsByClassName(this.state.currentFilterName)[0].style = 'border-color:#878787; color: gray; background-color: #bababa ;cursor: default';
+        }
 
-        //console.log("ON save " + (Number(this.state.currentFilterValue)))   
      }
 
-    handleClick(e) {
+    async handleClick(e) {
+        // grab the filter name of the button clicked from filter data
         const filterClicked = filters[e.target.className];
-        this.setState({
+
+        // set the state based on whats grabbed from filter data
+        await this.setState({
             currentFilterName: filterClicked.name,
             currentFilterValue: filterClicked.defaultValue,
             currentFilterUnit: filterClicked.unit,
@@ -48,50 +57,54 @@ class EditPicture extends Component {
             currentFilterMax: filterClicked.max,
             currentFilterStep: filterClicked.step
         })
+
+        // chanes the filter of the actual image 
         if (this.state.savedFilters.length > 0) {
             document.getElementById("image").style.filter = `${this.state.savedFilters.join( " ")} ${filterClicked.name}(${filterClicked.defaultValue}${filterClicked.unit})`;
         } else {
             document.getElementById("image").style.filter = `${filterClicked.name}(${filterClicked.defaultValue}${filterClicked.unit})`;
         }
         
+        // set the min, max, step of the sliders
         document.getElementById("sliderInput").min = filterClicked.min;
         document.getElementById("sliderInput").max = filterClicked.max;
         document.getElementById("sliderInput").step = filterClicked.step;
         document.getElementById("sliderInput").value = filterClicked.defaultValue;
 
+        // set the text of the code display
         document.getElementById("text").innerHTML = `filter: ${this.state.savedFilters.join(" ")} ${filterClicked.name}(${filterClicked.defaultValue}${filterClicked.unit})`
+
+        // change the bg color of the button 
+        document.querySelectorAll("button").forEach(i => {
+            console.log(i.style.backgroundColor)
+            if (i.style.color != 'gray') {
+                i.style = 'background-color: white'
+            }
+        })
+        if (this.state.currentFilterName == 'hue-rotate') {
+            document.getElementsByClassName('hueRotate')[0].style = await 'background-color:#fff6e0';
+        } else {
+            document.getElementsByClassName(this.state.currentFilterName)[0].style = await 'background-color:#fff6e0';
+        }
+         
     }
 
     async handleChange() {
-        var sliderInput = document.getElementById("sliderInput");
-        var sliderVaue = sliderInput.value;
-        
-        // set the min, max and step of the slider 
-        sliderInput.min = filters[this.state.currentFilterName].min;
-        sliderInput.max = filters[this.state.currentFilterName].max;
-        sliderInput.step = filters[this.state.currentFilterName].step;
 
         // change the picture to the value of the slider
-        document.getElementById("image").style.filter = `${this.state.savedFilters.join(" ")} ${this.state.currentFilterName}(${sliderVaue}${this.state.currentFilterUnit})`;
+        document.getElementById("image").style.filter = `${this.state.savedFilters.join(" ")} ${this.state.currentFilterName}(${document.getElementById("sliderInput").value}${this.state.currentFilterUnit})`;
 
-        //console.log(`${this.state.savedFilters.toString()} ${this.state.currentFilterName}(${sliderVaue}${this.state.currentFilterUnit})`);
         // change the state 
         await this.setState({
-            currentFilterName: filters[this.state.currentFilterName].name,
-            currentFilterValue: sliderVaue,
-            currentFilterUnit: filters[this.state.currentFilterName].unit,
-            currentFilterMin: filters[this.state.currentFilterName].min,
-            currentFilterMax: filters[this.state.currentFilterName].max,
-            currentFilterStep: filters[this.state.currentFilterName].step
+            currentFilterValue: document.getElementById("sliderInput").value,
         })
 
         document.getElementById("text").innerHTML = await `filter: ${this.state.savedFilters.join(" ")} ${this.state.currentFilterName}(${this.state.currentFilterValue}${this.state.currentFilterUnit})`
-        //console.log("ON CHANGE" + this.state.currentFilterValue)
     }
 
 
     render() {
-        let tempImage = 'https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f35e7bc5ab7c860cef3684c704b7fe1f&auto=format&fit=crop&w=1050&q=80'
+        let tempImage = 'https://images.unsplash.com/photo-1458530970867-aaa3700e966d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5f8426c7be0eb1b30a6329adeddb6207&auto=format&fit=crop&w=1050&q=80'
 
         return (
             <div className="editPicture">
@@ -115,10 +128,10 @@ class EditPicture extends Component {
                     <button className="blur" onClick={this.handleClick}>blur</button>
                     <button className="sepia" onClick={this.handleClick}>sepia</button>
                     <button className="hueRotate" onClick={this.handleClick}>hue-rotate</button>
-                    <button onClick={this.handleClick}>brightness</button>
-                    <button onClick={this.handleClick}>contrast</button>
+                    <button className="brightness" onClick={this.handleClick}>brightness</button>
+                    <button className="contrast" onClick={this.handleClick}>contrast</button>
                     <button className="invert" onClick={this.handleClick}>invert</button>
-                    <button onClick={this.handleClick}>opacity</button>
+                    <button className="opacity" onClick={this.handleClick}>opacity</button>
                 </div>
             </div>
         );
