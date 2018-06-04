@@ -28,9 +28,13 @@ class EditPicture extends Component {
     }
 
     handleSave() {
-        var filterToSave = `${this.state.currentFilterName}(${document.getElementById("sliderInput").value}${this.state.currentFilterUnit})`
-        this.setState({ savedFilters: [...this.state.savedFilters, filterToSave]})
-        document.getElementById("text").innerHTML = 'filter: ' + this.state.savedFilters.join(' ') + ' ' + filterToSave;
+
+        if ( document.getElementsByClassName('hueRotate')[0].disabled == false || document.getElementsByClassName(this.state.currentFilterName)[0].disabled == false) {
+            var filterToSave = `${this.state.currentFilterName}(${document.getElementById("sliderInput").value}${this.state.currentFilterUnit})`
+            this.setState({ savedFilters: [...this.state.savedFilters, filterToSave]})
+            document.getElementById("text").innerHTML = 'filter: ' + this.state.savedFilters.join(' ') + ' ' + filterToSave;
+    
+        }
         //change the color of the handlesave button
 
         //disable the button clicked and change css
