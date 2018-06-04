@@ -31,10 +31,11 @@ class EditPicture extends Component {
         var filterToSave = `${this.state.currentFilterName}(${document.getElementById("sliderInput").value}${this.state.currentFilterUnit})`
         this.setState({ savedFilters: [...this.state.savedFilters, filterToSave]})
         //document.getElementById("image").style.filter += filterToSave;
-        document.getElementById("text").innerHTML = 'filter: ' + this.state.savedFilters.toString() + ' ' + filterToSave;
+        document.getElementById("text").innerHTML = 'filter: ' + this.state.savedFilters.join(' ') + ' ' + filterToSave;
 
+        console.log(this.state.savedFilters.join(" "));
 
-        console.log("ON save " + (Number(this.state.currentFilterValue)))   
+        //console.log("ON save " + (Number(this.state.currentFilterValue)))   
      }
 
     handleClick(e) {
@@ -48,7 +49,7 @@ class EditPicture extends Component {
             currentFilterStep: filterClicked.step
         })
         if (this.state.savedFilters.length > 0) {
-            document.getElementById("image").style.filter = `${this.state.savedFilters.toString()} ${filterClicked.name}(${filterClicked.defaultValue}${filterClicked.unit})`;
+            document.getElementById("image").style.filter = `${this.state.savedFilters.join( " ")} ${filterClicked.name}(${filterClicked.defaultValue}${filterClicked.unit})`;
         } else {
             document.getElementById("image").style.filter = `${filterClicked.name}(${filterClicked.defaultValue}${filterClicked.unit})`;
         }
@@ -58,7 +59,7 @@ class EditPicture extends Component {
         document.getElementById("sliderInput").step = filterClicked.step;
         document.getElementById("sliderInput").value = filterClicked.defaultValue;
 
-        document.getElementById("text").innerHTML = `filter: ${this.state.savedFilters.toString()} ${filterClicked.name}(${filterClicked.defaultValue}${filterClicked.unit})`
+        document.getElementById("text").innerHTML = `filter: ${this.state.savedFilters.join(" ")} ${filterClicked.name}(${filterClicked.defaultValue}${filterClicked.unit})`
     }
 
     async handleChange() {
@@ -71,7 +72,7 @@ class EditPicture extends Component {
         sliderInput.step = filters[this.state.currentFilterName].step;
 
         // change the picture to the value of the slider
-        document.getElementById("image").style.filter = `${this.state.savedFilters.toString()} ${this.state.currentFilterName}(${sliderVaue}${this.state.currentFilterUnit})`;
+        document.getElementById("image").style.filter = `${this.state.savedFilters.join(" ")} ${this.state.currentFilterName}(${sliderVaue}${this.state.currentFilterUnit})`;
 
         //console.log(`${this.state.savedFilters.toString()} ${this.state.currentFilterName}(${sliderVaue}${this.state.currentFilterUnit})`);
         // change the state 
@@ -84,13 +85,13 @@ class EditPicture extends Component {
             currentFilterStep: filters[this.state.currentFilterName].step
         })
 
-        document.getElementById("text").innerHTML = await `filter: ${this.state.savedFilters.toString()} ${this.state.currentFilterName}(${this.state.currentFilterValue}${this.state.currentFilterUnit})`
-        console.log("ON CHANGE" + this.state.currentFilterValue)
+        document.getElementById("text").innerHTML = await `filter: ${this.state.savedFilters.join(" ")} ${this.state.currentFilterName}(${this.state.currentFilterValue}${this.state.currentFilterUnit})`
+        //console.log("ON CHANGE" + this.state.currentFilterValue)
     }
 
 
     render() {
-        let tempImage = 'https://images.unsplash.com/photo-1505325681473-5e712b2eadca?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=42268883c25739c07af3d28d8f2030de&auto=format&fit=crop&w=1867&q=80'
+        let tempImage = 'https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f35e7bc5ab7c860cef3684c704b7fe1f&auto=format&fit=crop&w=1050&q=80'
 
         return (
             <div className="editPicture">

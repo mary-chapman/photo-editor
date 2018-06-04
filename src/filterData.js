@@ -39,6 +39,7 @@ const filters = {
         unit: "deg"
     },
     invert: {
+        name: 'invert',
         min: 0,
         max: 1,
         step: .01,
