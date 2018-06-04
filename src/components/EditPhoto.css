@@ -87,4 +87,5 @@ img {
     background-color: #ffc9a3;
 }
 
-button:focus {outline:0;}
+button:focus {outline:0;
+}
