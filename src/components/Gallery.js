@@ -27,9 +27,34 @@ class Gallery extends Component {
             var filterStringBuildFromData = (i) => {
                 var string = '';
                 if (i.grayscale !== null) {
-                    string += `grayscale(${i.grayscale})`
+                    string += `grayscale(${i.grayscale}) `
+                } 
+                if (i.saturate !== null) {
+                    string += `saturate(${i.saturate}%) `
                 }
-                return string;
+                if (i.blur !== null) {
+                    string += `blur(${i.blur}px) `
+                }
+                if (i.sepia !== null) {
+                    string += `sepia(${i.sepia}) `
+                }
+                if (i.hueRotate !== null) {
+                    string += `hue-rotate(${i.hueRotate}deg) `
+                }
+                if (i.brightness !== null) {
+                    string += `brightness(${i.brightness}%) `
+                }
+                if (i.contrast !== null) {
+                    string += `contrast(${i.contrast}) `
+                }
+                if (i.invert !== null) {
+                    string += `invert(${i.invert}) `
+                }
+                if (i.opactiy !== null) {
+                    string += `invert(${i.opacity}) `
+                }
+
+                return string.trim();
             }
 
             console.log(`grayscale(${i.grayscale}) saturate(${i.saturate}) blur(${i.blur}) sepia(${i.sepia}) hue-rutate(${i.hueRotate}) brightness(${i.brightness}) contrast(${i.contrast}) invert(${i.invert}) opacity(${i.opacity})`)
@@ -38,7 +63,6 @@ class Gallery extends Component {
                 filter:  filterStringBuildFromData(i)
             }
             console.log(style)
-            //return <h1>hello {i.pictureUrl}</h1>
             return <img key={ind} src={i.pictureUrl} width="400px" style={style} />
         })
     }
@@ -46,7 +70,7 @@ class Gallery extends Component {
     render() {
         return (
             <div>
-                <h1>test</h1>
+                <h1>Gallery</h1>
                 { (this.state.pictures.length < 0 ? null : this.renderPictures()) }
             </div>
         )
