@@ -22,11 +22,22 @@ class Gallery extends Component {
             .catch(err => console.log(err));
     }
     renderPictures() {
-        var style = {
-            border: '2px solid green'
-        }
+
         return this.state.pictures.map((i, ind) => {
-            console.log(i.pictureUrl)
+            var filterStringBuildFromData = (i) => {
+                var string = '';
+                if (i.grayscale !== null) {
+                    string += `grayscale(${i.grayscale})`
+                }
+                return string;
+            }
+
+            console.log(`grayscale(${i.grayscale}) saturate(${i.saturate}) blur(${i.blur}) sepia(${i.sepia}) hue-rutate(${i.hueRotate}) brightness(${i.brightness}) contrast(${i.contrast}) invert(${i.invert}) opacity(${i.opacity})`)
+            var style = {
+                border: '2px solid green',
+                filter:  filterStringBuildFromData(i)
+            }
+            console.log(style)
             //return <h1>hello {i.pictureUrl}</h1>
             return <img key={ind} src={i.pictureUrl} width="400px" style={style} />
         })
