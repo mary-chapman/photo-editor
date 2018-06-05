@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom'
+
+import './GalleryImage.css'
 
 class GalleryImage extends Component {
     constructor() {
@@ -40,15 +43,15 @@ class GalleryImage extends Component {
     render() {
         
         return (
-            <div>
-                <img src={this.props.pictureUrl} 
+            // <div>
+                <img className="galleryImage" src={this.props.pictureUrl} 
                     onClick={() => this.props.handleDelete(this.props.id)}
                     style={{ filter: this.filterStringBuildFromData()}} 
                     width="400px" 
                 />
-                <button>edit</button>
+                //{/* <Link to={`/editPhoto/${this.props.id}`}><button>edit</button></Link> */}
                
-            </div>
+            // </div>
         )
 
     }

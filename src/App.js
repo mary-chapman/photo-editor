@@ -15,6 +15,7 @@ class App extends Component {
           <Route path="/" component={Navbar} />
           <Route exact path="/" component={ChoosePhoto} />
           <Route exact path="/editPhoto" component={EditPhoto} />
+          <Route exact path="/editPhoto/:id" component={EditPhoto} />
           <Route exact path="/gallery" component={Gallery} />
         </div>
       </Router>

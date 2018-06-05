@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import GalleryImage from './GalleryImage';
+import './Gallery.css'
 
 class Gallery extends Component {
     constructor(props) {
@@ -53,7 +54,9 @@ class Gallery extends Component {
         return (
             <div>
                 <h1>Gallery</h1>
+                <div className="galleryImages">
                 { (this.state.pictures.length < 0 ? null : this.renderPictures()) }
+                </div>
             </div>
         )
 
