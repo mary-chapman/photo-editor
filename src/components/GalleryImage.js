@@ -4,7 +4,9 @@ class GalleryImage extends Component {
     constructor() {
         super();
         this.filterStringBuildFromData = this.filterStringBuildFromData.bind(this);
+        //this.removePicture = this.removePicture.bind(this);
     }
+
 
     filterStringBuildFromData() {
         var string = '';
@@ -36,11 +38,16 @@ class GalleryImage extends Component {
     }
     
     render() {
+        
         return (
             <div>
                 <img src={this.props.pictureUrl} 
-                    style={{ filter: this.filterStringBuildFromData()}} width="400px" 
+                    onClick={() => this.props.handleDelete(this.props.id)}
+                    style={{ filter: this.filterStringBuildFromData()}} 
+                    width="400px" 
                 />
+                <button>edit</button>
+               
             </div>
         )
 

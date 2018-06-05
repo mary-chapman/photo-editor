@@ -10,11 +10,12 @@ class Gallery extends Component {
             pictures: []
          };
          this.renderPictures = this.renderPictures.bind(this);
+         this.deleteImage = this.deleteImage.bind(this);
     }
     componentDidMount() {
+       
         axios.get('http://localhost:8080/pictures')
             .then(res => {
-                // console.log(res);
                 res.data.map(i => {
                     console.log(res.data)
                     this.setState({
@@ -22,7 +23,14 @@ class Gallery extends Component {
                     })
                 })
             })
+            .then(() => console.log(this.state.pictures))
             .catch(err => console.log(err));
+    }
+    deleteImage(i) {
+        console.log("DELETE" + i)
+        console.log(this.state.pictures[0])
+        this.setState({pictures: this.state.pictures.filter(picture => picture.id !== i)})
+        axios.delete(`http://localhost:8080/pictures/${i}`)
     }
     renderPictures() {
         console.log(this.state.pictures)
@@ -36,6 +44,8 @@ class Gallery extends Component {
                         brightness={i.brightness}
                         contrast={i.contrast}
                         invert={i.invert}
+                        id={i.id}
+                        handleDelete={this.deleteImage}
                         />
         })
     }

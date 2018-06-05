@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {withRouter} from 'react-router-dom'
 
 import '../assets/cat.jpg';
 import filters from '../filterData';
@@ -7,10 +8,7 @@ import test from '../filterDataTEST';
 
 import './EditPhoto.css';
 
-
 var tempImage = 'https://images.unsplash.com/photo-1458530970867-aaa3700e966d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5f8426c7be0eb1b30a6329adeddb6207&auto=format&fit=crop&w=1050&q=80'
-
-
 
 class EditPicture extends Component {
     constructor(props) {
@@ -42,22 +40,21 @@ class EditPicture extends Component {
 
         if (this.state.savedFilters.length > 0) {
             await this.state.savedFilters.map(filter => {
-                //console.log(filter.match(/\d+/g).toString())
-                
-                //console.log(filterName)
                 objToSend[filter.match(/^[^\(]+/)] = filter.match(/\d+(\.\d*)?|\.\d+/g)[0];
             })
         }
 
         let data = JSON.stringify(objToSend)
-        
+
+        console.log(data);
+
         await axios.post('http://localhost:8080/pictures', data, {
             headers: {
                 'Content-Type': 'application/json',
             }
         })
         .then(res => {
-            console.log(objToSend)
+            this.props.history.push('/gallery')
         })
         
     }
