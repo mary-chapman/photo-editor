@@ -8,7 +8,7 @@ import test from '../filterDataTEST';
 
 import './EditPhoto.css';
 
-var tempImage = 'https://images.unsplash.com/photo-1458530970867-aaa3700e966d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5f8426c7be0eb1b30a6329adeddb6207&auto=format&fit=crop&w=1050&q=80'
+
 
 class EditPicture extends Component {
     constructor(props) {
@@ -145,16 +145,16 @@ class EditPicture extends Component {
 
 
     render() {
-
+        var tempImage = this.props.image
         return (
             <div className="editPicture">
 
                 <button className="saveToGallery" onClick={this.postPicture}>Add Image to Gallery</button>
 
                 {/* <img id="image" src={require('../assets/cat.jpg')} width="400px" alt="" /> */}
-                <img id="image" src={tempImage} width="400px" alt="" />
+                <img id="image" src={this.props.image} width="400px" alt="" />
 
-                <div class="editControls" style={(this.state.buttonsTouched) ? {visibility: 'visible'} : {visibility: 'hidden'}}>
+                <div className="editControls" style={(this.state.buttonsTouched) ? {visibility: 'visible'} : {visibility: 'hidden'}}>
                     <div className="code">
                         <div id="text"></div>
                     </div>

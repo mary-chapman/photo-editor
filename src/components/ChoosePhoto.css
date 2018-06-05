@@ -4,6 +4,26 @@
     align-items: center;
     margin-top: 75px;
 }
+input[type="file"] {
+    display: none;
+}
+.inputfile {
+    display: block;
+    width: 200px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 10pt;
+    font-weight: 700;
+    letter-spacing: .1em;
+    border: 2px solid #1f6fef;
+    color: #6da5ff;
+}
+.inputfile:hover {
+    border-color: #6da5ff;
+    color: #6da5ff;
+    cursor: pointer;
+}
+
 .choosePhoto button {
     display: block;
     width: 200px;
@@ -16,14 +36,11 @@
 }
 
 .upload {
-    border: 2px solid #1f6fef;
-    color: #6da5ff;
+
 }
 
 .upload:hover {
-    border-color: #6da5ff;
-    color: #6da5ff;
-    cursor: pointer;
+
 }
 
 .random {
