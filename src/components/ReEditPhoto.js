@@ -39,14 +39,20 @@ class ReEditPicture extends Component {
         }
 
         if (this.state.savedFilters.length > 0) {
+            console.log("SAVED" + this.state.savedFilters)
             await this.state.savedFilters.map(filter => {
-                objToSend[filter.match(/^[^\(]+/)] = filter.match(/\d+(\.\d*)?|\.\d+/g)[0];
+                console.log(filter.match(/^[^\(]+/))
+                if (filter.match(/^[^\(]+/) == 'hue-rotate') {
+                    objToSend['hueRotate'] = filter.match(/\d+(\.\d*)?|\.\d+/g)[0]
+                } else {
+                    objToSend[filter.match(/^[^\(]+/)] = filter.match(/\d+(\.\d*)?|\.\d+/g)[0];
+                }
             })
         }
 
         let data = JSON.stringify(objToSend)
 
-        console.log(data);
+        //console.log(data);
 
         await axios.post('http://localhost:8080/pictures', data, {
             headers: {
@@ -67,7 +73,7 @@ class ReEditPicture extends Component {
             document.getElementById("text").innerHTML = 'filter: ' + this.state.savedFilters.join(' ') + ' ' + filterToSave;
     
         }
-        //change the color of the handlesave button
+
 
         //disable the button clicked and change css
         if (this.state.currentFilterName == 'hue-rotate') {

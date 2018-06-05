@@ -89,3 +89,14 @@ img {
 
 button:focus {outline:0;
 }
+
+.saveToGallery {
+    border: 2px solid #f2897b;
+    margin-left: 80%;
+    padding: 10px;
+    color: #f2897b;
+}
+
+.saveToGallery:hover {
+    cursor: pointer;
+}

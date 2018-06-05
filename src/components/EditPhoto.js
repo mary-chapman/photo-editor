@@ -149,7 +149,7 @@ class EditPicture extends Component {
         return (
             <div className="editPicture">
 
-                <button onClick={this.postPicture}>Add Image to Gallery</button>
+                <button className="saveToGallery" onClick={this.postPicture}>Add Image to Gallery</button>
 
                 {/* <img id="image" src={require('../assets/cat.jpg')} width="400px" alt="" /> */}
                 <img id="image" src={tempImage} width="400px" alt="" />
