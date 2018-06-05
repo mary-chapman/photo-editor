@@ -11,8 +11,6 @@ class NavBar extends Component {
             <nav className="navBar">
                 <ul className="container">
                     <StyledLink to='/' style={{flex: 1, textDecoration: 'none'}}><li className="navTitle">Photo Editor</li></StyledLink>
-                    <li className="login">LOG IN</li>
-                    <li className="signup">SIGN UP</li>
                 </ul>
             </nav>
         );

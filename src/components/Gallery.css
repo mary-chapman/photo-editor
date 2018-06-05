@@ -1,3 +1,14 @@
 .galleryImages {
     text-align: left;
 }
+
+
+@media only screen and (max-width: 600px) {
+    .galleryImages img {
+        display: block;
+        width: 80%;
+        margin-top: 30px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
